@@ -66,8 +66,7 @@ func OutputFileVersions() {
 		iLoop++
 	}
 
-	//TODO:ファイル名のフォーマットを修正する
-	err = file.Save(time.Now().Format("2006-01-01-0000000000") + ".xlsx")
+	err = file.Save(time.Now().Format("20060102150405.99") + ".xlsx")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
