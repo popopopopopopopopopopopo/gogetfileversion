@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"syscall"
 	"time"
 )
 
@@ -97,6 +98,18 @@ func GetFileInfos(dirName string, filePattern string) (fileInfos []os.FileInfo, 
 		fmt.Println(fileInfo.Name())
 		fmt.Println(fileInfo.IsDir())
 		fmt.Println(fileInfo.Mode())
+		internalStat, err := fileInfo.Sys().(syscall.Win32FileAttributeData)
+
+		if err {
+			fmt.Println("win以外")
+		} else {
+			fmt.Println(internalStat.FileSizeHigh)
+			fmt.Println(internalStat.FileSizeLow)
+			fmt.Println(internalStat.CreationTime)
+			fmt.Println(internalStat.LastAccessTime)
+			fmt.Println(internalStat.LastWriteTime)
+			fmt.Println(internalStat.FileAttributes)
+		}
 	}
 	return
 }
